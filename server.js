@@ -5,7 +5,15 @@ const fs = require("fs");
 //b - npm modules that are downloaded (terminal install)
 const express = require("express");
 const logger = require("morgan");
+const { v4: uuidv4 } = require("uuid");//to generate a unique id we import uuid
 
+//to generate a unique id we invoke the id funciton uuidv4() below
+const note = {
+    id: uuidv4(),
+    title: "Hello",
+    text: "World!"
+  }
+  
 //c calling express
 const app = express();
 //d creating a port
