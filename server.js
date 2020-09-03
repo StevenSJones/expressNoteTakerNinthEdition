@@ -6,13 +6,18 @@ const fs = require("fs");
 const express = require("express");
 const logger = require("morgan");
 
-//calling express
+//e middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(logger("dev"));
+
+//c calling express
 const app = express();
+//d creating a port
 const PORT = 8080;
 
-//add routes
+//add routes. My data is in a different location relative to the other files. SO BE CAREFUL WHEN routing the data
 
-//my data is in a different location relative to the other files. SO BE CAREFUL WHEN routing the data
 
 //get data
 
