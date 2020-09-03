@@ -24,7 +24,7 @@ const PORT = 8080;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(logger("dev"));
-app.use(express.static("public"));//builds a route for every file in the public directory. 
+app.use(express.static("public")); //builds a route for every file in the public directory.
 
 //f add HTML route. My data is in a different location (in public file)relative to the other files. SO BE CAREFUL WHEN routing the data
 app.get("/", function (req, res) {
@@ -48,16 +48,11 @@ app.get("/api/notes", function (req, res) {
 
 //m api route for post. this adds a unique id to the note
 app.post("/api/notes", function (req, res) {
-  const note = {
-    id: uuidv4(), //add unique id to the data that we get back
-    ...req.body,
-  };
-
   //n readFile (read from the "server")
   res.readFile(__dirname + "/db/db.json", "utf8", function (err, data) {
     //n parse data
     const notes = JSON.parse(data);
-    //push parsed data to parsed data array 
+    //push parsed data to parsed data array
     notes.push(note);
     //stringify data
     const stringifiedData = JSON.stringify(notes, null, 2);
@@ -67,6 +62,15 @@ app.post("/api/notes", function (req, res) {
       res.json(note);
     });
   });
+  const note = {
+    id: uuidv4(), //add unique id to the data that we get back
+    ...req.body,
+  };
+});
+
+app.all("*", function (req, res) {
+  res.sendFile(__dirname + "/public/index.html");
+  console.log("THis far");
 });
 
 //j make out server listen and pass in PORT and a callback function as arguments
