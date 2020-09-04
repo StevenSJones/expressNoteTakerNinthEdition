@@ -49,15 +49,19 @@ app.get("/api/notes", function (req, res) {
 //m api route for post. this adds a unique id to the note
 app.post("/api/notes", function (req, res) {
   //n readFile (read from the "server")
-  res.readFile(__dirname + "/db/db.json", "utf8", function (err, data) {
+  fs.readFile(__dirname + "/db/db.json", "utf8", function (err, data) {
     //n parse data
     const notes = JSON.parse(data);
+    //How do I get my note frm the req obj????
+    // console.log(req);
+    let note = req.body;
     //push parsed data to parsed data array
     notes.push(note);
+    console.log(notes);
     //stringify data
     const stringifiedData = JSON.stringify(notes, null, 2);
     //write to server
-    fs.writeFile("/db/db.json", stringifiedData, function () {
+    fs.writeFile(__dirname + "/db/db.json", stringifiedData, function () {
       //n pass data to the front end
       res.json(note);
     });
@@ -68,9 +72,14 @@ app.post("/api/notes", function (req, res) {
   };
 });
 
+app.delete("/api/notes/:id", function (req, res) {
+  console.log("DELETE");
+});
+
+//__dir name is in place of the file path and adds that to string to allow us to reach the index.html page itself.
 app.all("*", function (req, res) {
   res.sendFile(__dirname + "/public/index.html");
-  console.log("THis far");
+  // console.log("THis far");
 });
 
 //j make out server listen and pass in PORT and a callback function as arguments
