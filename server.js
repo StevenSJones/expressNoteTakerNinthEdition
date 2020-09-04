@@ -7,13 +7,6 @@ const express = require("express");
 const logger = require("morgan");
 const { v4: uuidv4 } = require("uuid"); //k to generate a unique id we import uuid
 
-//b to generate a unique id we invoke the id funciton uuidv4() below
-const note = {
-  id: uuidv4(),
-  title: "Hello",
-  text: "World!",
-};
-
 //c calling express
 const app = express();
 //d creating a port
@@ -55,10 +48,10 @@ app.post("/api/notes", function (req, res) {
     //How do I get my note frm the client (browser)?
     // console.log(req);
     //b add unique id to the data that we get back
-      const note = {
-        id: uuidv4(),
-        ...req.body,
-      };
+    const note = {
+      id: uuidv4(),
+      ...req.body,
+    };
     //push parsed data to parsed data array
     notes.push(note);
     // console.log(notes);
@@ -86,7 +79,7 @@ app.delete("/api/notes/:id", function (req, res) {
       ...req.body,
     };
     //filter parsed data to parsed data array
-    notes = notes.filter(note => note.id !== id);
+    notes = notes.filter((note) => note.id !== id);
     // console.log(notes);
     //stringify data
     const stringifiedData = JSON.stringify(notes, null, 2);
