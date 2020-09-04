@@ -10,7 +10,7 @@ const { v4: uuidv4 } = require("uuid"); //k to generate a unique id we import uu
 //c calling express
 const app = express();
 //d creating a port
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 //e was npm init, npm express and npm morgan in terminal
 
 // f middleware
