@@ -97,7 +97,7 @@ app.all("*", function (req, res) {
   // console.log("THis far");
 });
 
-//l make out server listen and pass in PORT and a callback function as arguments
+//l make the server listen and pass in PORT and a callback function as arguments
 app.listen(PORT, function () {
   console.log("app is listening on PORT: " + PORT);
 });
